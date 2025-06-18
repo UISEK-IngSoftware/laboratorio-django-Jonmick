@@ -11,7 +11,17 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ pokemon.name }}</h5>
                     <p class="card-text">Peso: {{ pokemon.weight }} | Altura: {{ pokemon.height }}</p>
-                    <a class="btn btn-primary" href="pokemon/{{pokemon.id}}" role="button">Ver Pokemon</a>
+                    <a class="btn btn-primary" href="{% url "pokedex:pokemon" pokemon.id %}" role="button">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    {% if user.is_authenticated %}
+                        <a class="btn btn-primary" href="{% url "pokedex:edit_pokemon" pokemon.id %}" role="button">
+                            <i class="fa-solid fa-pencil"></i>
+                        </a>
+                        <a class="btn btn-danger" href="{% url "pokedex:delete_pokemon" pokemon.id %}" role="button">
+                        <i class="fa-solid fa-trash"></i>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

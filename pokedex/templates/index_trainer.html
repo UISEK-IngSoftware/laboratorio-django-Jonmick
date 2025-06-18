@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Listado de Entrenadores{% endblock title %}
+{% block content %}
+<br>
+<ul class="list-group">
+    <div class="row">
+        {% for trainer in trainers %}
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card">
+                <img src="{{ trainer.picture.url }}" alt="{{ trainer.name }}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ trainer.name }}</h5>
+                    <p class="card-text">Edad: {{ trainer.age }} | Ciudad: {{ trainer.city }}</p>
+                    <a class="btn btn-primary" href="{% url "pokedex:trainer" trainer.id %}" role="button">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    {% if user.is_authenticated %}
+                        <a class="btn btn-primary" href="{% url "pokedex:edit_trainer" trainer.id %}" role="button">
+                            <i class="fa-solid fa-pencil"></i>
+                        </a>
+                        <a class="btn btn-danger" href="{% url "pokedex:delete_trainer" trainer.id %}" role="button">
+                        <i class="fa-solid fa-trash"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</ul>
+{% endblock content %}
